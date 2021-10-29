@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+*{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   user-select: none;
+}
+:root{
+   --backgroundColor: whitesmoke;
+   --fontFamily: 'Poppins', sans-serif;
+   --whiteColor: white;
+   --blackColor: black;
+}
+.wraper{
+   background-color: var(--backgroundColor);
+   font-family: var(--fontFamily);
+   min-height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.wraper h4{
+   border-bottom: 1px solid var(--blackColor);
+}
+.wraper-inside{
+   background-color: var(--whiteColor);
+   border: 1px solid var(--blackColor);
+   padding: 1rem;
+   font-size: 1.3rem;
+   border-radius: 4px;
+   width: 40%;
+}
+.wraper-inside .quiz-rule{
+   position: relative;
+}
+.quiz-rule .btn-quiz-start{
+   position: absolute;
+   right: 0;
+   bottom: -15px;
+}
+.quiz-rule button,
+.container .ans-submit button,
+.container .play-again{
+   background-color: var(--blackColor);
+   color: var(--whiteColor);
+   padding: .3rem .4rem;
+   cursor: pointer;
+   font-weight: bold;
+   border-radius: 2px;
+} 
+.quiz-rule button:hover,
+.container .ans-submit button:hover,
+.container .play-again:hover{
+   background-color: var(--whiteColor);
+   color: var(--blackColor);
+   transition: .5s;
+}
+.container{
+   display: none;
+   flex-direction: column;
+}
+.container input[type='radio'],
+.container label{
+   cursor: pointer;
+}
+.container input[type='radio']:hover,
+.container label:hover{
+   font-weight: bold;
+}
+.container .again-score{
+   display: none;
+   justify-content: space-evenly;
+   background-color: yellow;
+   padding: .3rem .5rem;
+   border-radius: 4px;
+}
+.container .total-score{
+   text-align: center;
+   font-weight: bold;
+}

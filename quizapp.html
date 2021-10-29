@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Quiz app</title>
+   <!-- css -->
+   <link rel="stylesheet" href="quizapp.css">
+</head>
+<body>
+   <article>
+      <div class="wraper">
+         <div class="wraper-inside">
+            <div class="quiz-rule">
+               <h4>Some Rules of this Quiz</h4>
+               <p>1.Once you select your answer.it can't be undone</p>
+               <p>2.You can't exixt from the Quiz while you are playing</p>
+               <p>3.You will get point on the basis of your correct answer</p>
+               <div class="btn-quiz-start">
+                  <button>continue</button>
+               </div>
+            </div>
+            <div class="container">
+               <h4>this is my question</h4>
+               <div class="input-radio">
+                  <div>
+                     <input type="radio" name='same' id='ans1' class='check-same'>
+                     <label for="ans1" class='option1'>option1</label>
+                  </div>
+                  <div>
+                     <input type="radio" name='same' id='ans2' class='check-same'>
+                     <label for="ans2" class='option2'>option2</label>
+                  </div>
+                  <div>
+                     <input type="radio" name='same' id='ans3' class='check-same'>
+                     <label for="ans3" class='option3'>option3</label>
+                  </div>
+                  <div>
+                     <input type="radio" name='same' id='ans4' class='check-same'>
+                     <label for="ans4" class='option4'>option4</label>
+                  </div>
+               </div>
+               <div class="ans-submit">
+                  <button>submit</button>
+               </div>
+               <div class="again-score">
+                  <p class='total-score'></p>
+                  <button class='play-again'>Play again</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </article>
+
+   <script>
+      const quizStart= document.querySelector('.btn-quiz-start button');
+      quizStart.addEventListener('click',()=>{
+         const container= document.querySelector('.container');
+         container.style.display= 'flex';
+         const quizRule= document.querySelector('.quiz-rule');
+         quizRule.style.display='none';
+         quizDBAccess();
+      });
+
+      const quizDB= [
+         {
+            question: 'what is the full form of HTML.',
+            a: 'hyper tect markup language',
+            b: 'hyper text mark language',
+            c: 'hyper text markup language',
+            d: 'hyper tatto markup languge',
+            answer: 'ans3'
+         },
+         {
+            question: 'what is the full form of CSS.',
+            a: 'casding style sheet',
+            b: 'casding role sheet',
+            c: 'casding super sheet',
+            d: 'casding sony sheet',
+            answer: 'ans1'
+         },
+         {
+            question: 'what is the full form of JS.',
+            a: 'java super',
+            b: 'java sheet',
+            c: 'java script',
+            d: 'java shooter',
+            answer: 'ans3'
+         },
+         {
+            question: 'what is the full form of DBMS.',
+            a: 'data base mondo system',
+            b: 'data base machine super',
+            c: 'data boss mongo system',
+            d: 'data base management system',
+            answer: 'ans4'
+         }
+      ];
+
+      const question= document.querySelector('.container h4');
+      const option1= document.querySelector('.option1');
+      const option2= document.querySelector('.option2');
+      const option3= document.querySelector('.option3');
+      const option4= document.querySelector('.option4');
+      
+      count=0;
+      anserNo=0;
+      function quizDBAccess(){
+         question.innerHTML= quizDB[count].question;
+         option1.textContent= quizDB[count].a;
+         option2.textContent= quizDB[count].b;
+         option3.textContent= quizDB[count].c;
+         option4.textContent= quizDB[count].d;
+         return count++;
+      }
+      function radioFalse(){
+         const ans1= document.querySelector('#ans1');
+         const ans2= document.querySelector('#ans2');
+         const ans3= document.querySelector('#ans3');
+         const ans4= document.querySelector('#ans4');
+         ans1.checked= false;
+         ans2.checked= false;
+         ans3.checked= false;
+         ans4.checked= false;
+      }
+      let score=0;
+      const submit= document.querySelector('.container .ans-submit');
+      submit.addEventListener('click',()=>{
+         const checkSame= document.querySelectorAll('.check-same');
+         let idRadioCheck;
+         for(let idRadio of checkSame){
+            if(idRadio.checked){
+               idRadioCheck= idRadio.id;
+            }
+         }
+         
+         if(idRadioCheck===quizDB[anserNo].answer){
+            score++;
+         }
+         anserNo++;
+
+         if(count<quizDB.length){
+            quizDBAccess();
+         }
+         else{
+            const showScore= document.querySelector('.total-score');
+            showScore.textContent=`Your score is ${score} out of ${quizDB.length}`;
+            
+            const againScore= document.querySelector('.again-score');
+            againScore.style.display='flex';
+            againScore.addEventListener('click',()=>{
+               location.reload();
+            });
+            if(againScore.style.display='flex'){
+               submit.style.display='none';
+            }
+         }
+         radioFalse();
+      });
+   </script>
+</body>
+</html>
